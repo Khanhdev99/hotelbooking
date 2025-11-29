@@ -1,162 +1,239 @@
-📌 Yêu Cầu Chi Tiết – Hệ Thống Đặt Hotel Cho Khách Du Lịch
-I. Công Nghệ
+📌 Detailed Requirements – Hotel Booking System for Travelers
+I. Technology Stack
+Backend
 
-Backend: Node.js (Express/NestJS), RESTful API
+Node.js (Express or NestJS)
 
-Database: MongoDB (Mongoose)
+RESTful API architecture
 
-Frontend:
+Database
 
-Mobile App (Khách + Chủ Hotel) → Kết nối API khách hàng & chủ hotel
+MongoDB using Mongoose ORM
 
-Web React (Admin) → Kết nối API quản trị
+Frontend
 
-Tích hợp:
+Mobile Application
 
-Thanh toán: VNPAY (VN) + Stripe (quốc tế)
+Customer App (Hotel Guests)
 
-Xác minh OTP Gmail (Google SMTP hoặc dịch vụ mail server)
+Hotel Owner App
 
-Chatbot: Gemini API
+Both connect to the backend via REST API
 
-II. Tính Năng Chi Tiết
-1. Khách (Người dùng App)
-1.1. Xác thực & Tài khoản
+Web Admin Panel
 
-Đăng ký tài khoản (email + mật khẩu, xác minh OTP Gmail)
+Built with React
 
-Đăng nhập (JWT Token, refresh token)
+Connected to Admin API endpoints
 
-Đa ngôn ngữ: Tiếng Việt / English (config đa ngôn ngữ ở client, backend trả dữ liệu gốc)
+Third-Party Integrations
 
-1.2. Khám phá khách sạn
+Payment Gateways
 
-Danh sách khách sạn (phân loại theo 3 sao – 5 sao)
+VNPAY (Vietnam)
 
-Tìm kiếm theo tên, vị trí, giá, loại phòng, dịch vụ
+Stripe (International)
 
-Chi tiết khách sạn:
+Email OTP Verification
 
-Hình ảnh
+Gmail SMTP or mail server provider
 
-Mô tả
+AI Chatbot
 
-Loại phòng (standard, deluxe, suite, …)
+Google Gemini API
 
-Giá
+II. Detailed Features
+1. Customer (Mobile App)
+1.1. Authentication & User Account
 
-Chính sách huỷ
+Sign up with email + password, with OTP verification via Gmail
 
-Dịch vụ đi kèm
+JWT-based login (access token + refresh token)
 
-1.3. Danh sách yêu thích
+Multilingual support: Vietnamese / English
+→ Backend returns raw data, client handles localization
 
-Thêm/Xóa phòng/khách sạn vào “Yêu thích”
+1.2. Hotel Discovery
 
-1.4. Đặt phòng
+Hotel listing filtered by star rating (3★, 4★, 5★)
 
-Chọn loại phòng, số lượng, ngày check-in/check-out
+Search hotels by:
 
-Đặt phòng bắt buộc thanh toán trước (VNPAY/Stripe)
+Name
 
-Xác nhận thành công → Gửi email thông báo (Gmail API/SMTP)
+Location
 
-1.5. Lịch sử đặt phòng
+Price
 
-Xem danh sách booking
+Room type
 
-Trạng thái: Đang chờ, Đã xác nhận, Đã hủy, Đã thanh toán
+Provided services
 
-1.6. Chatbot hỗ trợ
+Hotel Details Page:
 
-Tích hợp Gemini (trả lời gợi ý khách sạn theo dữ liệu hệ thống)
+Image gallery
 
-1.7. Đánh giá & Review
+Description
 
-Người dùng có thể:
+Room types (Standard, Deluxe, Suite…)
 
-Đánh giá (1–5 sao)
+Pricing
 
-Viết bình luận kèm hình ảnh
+Cancellation policies
 
-Hiển thị review trung bình cho khách sạn
+Included services
 
-1.8. Xếp hạng thành viên
+1.3. Favorites
 
-Hạng Bạc, Vàng, Kim Cương (dựa trên tổng số tiền đặt phòng)
+Add/remove rooms or hotels to Favorite List
 
-Kim Cương giảm 5% trên tổng hóa đơn
+1.4. Room Booking
 
-2. Chủ Khách Sạn (Người dùng App)
-2.1. Quản lý hồ sơ khách sạn
+Select:
 
-Đăng ký khách sạn (thông tin cơ bản, giấy phép kinh doanh, CMND/CCCD)
+Room type
 
-Duyệt khách sạn (admin duyệt trước khi public)
+Number of rooms
 
-2.2. Quản lý phòng
+Check-in & check-out dates
 
-CRUD phòng (thêm, sửa, xóa)
+Payment required before confirming booking (VNPAY / Stripe)
 
-Upload hình ảnh, mô tả, giá, tiện ích
+Successful booking → send confirmation email via SMTP
 
-2.3. Quản lý đặt phòng
+1.5. Booking History
 
-Xem danh sách khách đặt phòng
+View all past and upcoming bookings
 
-Trạng thái: chờ xác nhận, đã đặt, đã hủy
+Booking statuses:
 
-Chủ hotel có thể xác nhận/huỷ booking
+Pending
 
-2.4. Quản lý lịch & số lượng phòng
+Confirmed
 
-Quản lý số lượng phòng trống theo ngày
+Cancelled
 
-Cập nhật tình trạng “còn phòng/hết phòng”
+Paid
 
-2.5. Doanh thu & báo cáo
+1.6. Chatbot Assistant
 
-Thống kê số lượng đặt phòng theo tháng/quý
+AI chatbot (Gemini API) suggests hotels based on system database
 
-Báo cáo doanh thu
+1.7. Reviews & Ratings
 
-2.6. Hỗ trợ khách hàng
+Customers can:
 
-Trả lời tin nhắn khách (chat nội bộ trong app)
+Rate hotels (1–5 stars)
 
-3. Admin (Web React)
-3.1. Quản trị người dùng
+Post written reviews with images
 
-CRUD user (khách + chủ hotel)
+View hotel average rating and detailed reviews
 
-Phân quyền (khách / chủ hotel / admin)
+1.8. Membership Tiers
 
-3.2. Quản trị khách sạn
+Based on total spending:
 
-Duyệt khách sạn đăng ký
+Silver
 
-Quản lý danh sách khách sạn (CRUD)
+Gold
 
-3.3. Quản trị phòng
+Diamond
+→ Diamond users receive 5% discount on the total booking fee
 
-CRUD tất cả phòng trên hệ thống
+2. Hotel Owner (Mobile App)
+2.1. Hotel Profile Management
 
-3.4. Quản trị đặt phòng
+Register a hotel with:
 
-Xem thống kê booking toàn hệ thống
+Basic information
 
-Quản lý trạng thái đặt phòng
+Business license
 
-3.5. Báo cáo & Thống kê
+ID/Passport (CMND/CCCD)
 
-Tổng số khách sạn, phòng, booking
+Hotel must be approved by Admin before it becomes public
 
-Doanh thu theo tháng/quý/năm
+2.2. Room Management
 
-Thống kê hạng thành viên
+Full CRUD operations for rooms:
 
-3.6. Quản lý nội dung
+Add, edit, delete
 
-CRUD review, đánh giá
+Upload images
 
-Quản lý chatbot (import dữ liệu khách sạn vào Gemini)
+Set price, description, facilities
+
+2.3. Booking Management
+
+View all bookings from customers
+
+Manage booking statuses:
+
+Pending confirmation
+
+Confirmed
+
+Cancelled
+
+Hotel owner can approve or cancel bookings
+
+2.4. Availability & Room Inventory
+
+Manage room availability for each day
+
+Update “Available / Sold Out” status
+
+2.5. Revenue & Reports
+
+Monthly and quarterly booking reports
+
+Revenue analytics and insights
+
+2.6. Customer Support
+
+Chat with customers through in-app internal messaging
+
+3. Admin (React Web Panel)
+3.1. User Management
+
+CRUD users (customers + hotel owners)
+
+Role-based permissions:
+
+Customer
+
+Hotel Owner
+
+Admin
+
+3.2. Hotel Management
+
+Approve newly registered hotels
+
+Manage all hotels (CRUD)
+
+3.3. Room Management
+
+CRUD operations for all rooms across the system
+
+3.4. Booking Management
+
+View statistics for all bookings
+
+Modify booking statuses
+
+3.5. System Reports & Analytics
+
+Total hotels, rooms, and bookings
+
+Revenue reports (monthly, quarterly, yearly)
+
+Membership tier statistics
+
+3.6. Content Management
+
+CRUD hotel reviews and ratings
+
+Manage chatbot dataset:
+
+Import structured hotel data into Gemini
